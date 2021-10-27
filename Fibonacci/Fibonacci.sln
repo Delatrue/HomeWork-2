@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIbonacci recursion", "Part2_Lesson_1_3\FIbonacci recursion.csproj", "{953F6DDC-E2BA-44B3-AAD5-5C386CAA2B51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fibonacci cycle", "Part2_Lesson_1_3_cycle\Fibonacci cycle.csproj", "{613DA1BE-104E-46CE-B9FD-93259AE32522}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{953F6DDC-E2BA-44B3-AAD5-5C386CAA2B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953F6DDC-E2BA-44B3-AAD5-5C386CAA2B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953F6DDC-E2BA-44B3-AAD5-5C386CAA2B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953F6DDC-E2BA-44B3-AAD5-5C386CAA2B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{613DA1BE-104E-46CE-B9FD-93259AE32522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{613DA1BE-104E-46CE-B9FD-93259AE32522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{613DA1BE-104E-46CE-B9FD-93259AE32522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{613DA1BE-104E-46CE-B9FD-93259AE32522}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFE9DB1E-FFFF-4F40-8DF9-3CFD6110B556}
+	EndGlobalSection
+EndGlobal
