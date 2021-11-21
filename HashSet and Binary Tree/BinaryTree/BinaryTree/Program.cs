@@ -1,119 +1,186 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BinaryTree //19.11 - в процессе доработки
+namespace BinaryTree //22.11 - готово!
 {
-    public class TreeNode
+    public class TreeNode : IComparable
     {
         public TreeNode(int value)
         {
             Value = value;
         }
 
-        public int Value { get; set; } // ключ узла
-        public TreeNode LeftChild { get; set; } // указатель на левого потомка  
-        public TreeNode RightChild { get; set; } // указатель на правого потомка
-        public TreeNode Parent { get; set; } // указатель на предка
+        public int Value { get; set; }
+        public TreeNode LeftChild { get; set; }
+        public TreeNode RightChild { get; set; }
 
-
-        public override bool Equals(object obj)
+        public int CompareTo(object obj)
         {
-            var node = obj as TreeNode;
-
-            if (node == null)
-                return false;
-
-            return node.Value == Value;
-        }
-
-        public static implicit operator TreeNode(int v)
-        {
-            throw new NotImplementedException();
+            return Value.CompareTo(obj);
         }
     }
-
     public interface ITree
     {
         TreeNode GetRoot();
-        void AddItem(int value); // добавить узел
-        void RemoveItem(int value); // удалить узел по значению
-        TreeNode GetNodeByValue(int value); //получить узел дерева по значению
-        void PrintTree(); //вывести дерево в консоль
+        void AddItem(int value); // добавить узел - !реализовано
+        void RemoveItem(int value); // удалить узел по значению - !реализовано
+        TreeNode GetNodeByValue(int value); //получить узел дерева по значению - !реализовано
+        void PrintTree(); //вывести дерево в консоль - !реализовано
     }
     public class Tree : ITree
     {
-        public TreeNode Root { get; set; }
+        public static TreeNode root;
         public void AddItem(int value)
         {
-            while(Root != null)
+            if (root == null)
             {
-                if(value > Root.Value)
-                {
-                    if(Root.RightChild != null)
-                    {
-                        Root = Root.RightChild;
-                    }
-                    else
-                    {
-                        Root.Parent = Root;
-                        Root.RightChild = value;
-                    }
-                    break;
-                }
-                else if(value < Root.Value)
-                {
-                    if(Root.LeftChild != null)
-                    {
-                        Root = Root.LeftChild;
-                    }
-                    else
-                    {
-                        value = Root.Value;
-                        Root.LeftChild = value;
-                    }
-                }
-                break;
+                root = new TreeNode(value);
+            }
+            else
+            {
+                AddTo(root, value);
             }
         }
+        private void AddTo(TreeNode root, int value)
+        {
+            if (value.CompareTo(root.Value) < 0)
+            {
+                if (root.LeftChild == null)
+                {
+                    root.LeftChild = new TreeNode(value);
+                }
+                else
+                {
+                    AddTo(root.LeftChild, value);
+                }
+            }
+            else
+            {
+                if(value.CompareTo(root.Value) > 0)
+                {
+                    if (root.RightChild == null)
+                    {
+                        root.RightChild = new TreeNode(value);
+                    }
+                    else
+                    {
+                        AddTo(root.RightChild, value);
+                    }
+                }
+            }
+        }
+        
 
         public TreeNode GetNodeByValue(int value)
         {
-            Node search(x : Node, k: T):
-                if x == null or k == x.key
-                return x
-                if k < x.key
-                return search(x.left, k)
-                    else
-                return search(x.right, k)
+            TreeNode current = root;
+            TreeNode parent = null;
+            while (current != null)
+            {
+                int result = current.CompareTo(value);
+                if (result > 0)
+                {
+                    parent = current;
+                    current = current.LeftChild;
+                }
+                else if (result < 0)
+                {
+                    parent = current;
+                    current = current.RightChild;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return current;
         }
 
         public TreeNode GetRoot()
         {
-            return Root;
+             return root;
         }
 
         public void PrintTree()
         {
-            if(
-            /*func preorderTraversal(x : Node)
-                if x != null
-                print x.key
-                preorderTraversal(x.left)
-                preorderTraversal(x.right)*/
+            PreOrderTravers(root);
+        }
+        public void PreOrderTravers(TreeNode root, string space = " ")
+        {
+            if (root != null)
+            {
+                PreOrderTravers(root.RightChild, space + "\t");
+                Console.WriteLine($"{space}{root.Value}");
+                PreOrderTravers(root.LeftChild, space + "\t");
+            }
         }
 
         public void RemoveItem(int value)
         {
-            throw new NotImplementedException();
+            TreeNode current = root;
+            TreeNode parent = null;
+            while (current != null)
+            {
+                int result = current.CompareTo(value);
+                if (result > 0)
+                {
+                    parent = current;
+                    current = current.LeftChild;
+                }
+                else if (result < 0)
+                {
+                    parent = current;
+                    current = current.RightChild;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if(current.LeftChild == null) // если нет детей
+            {
+                if(current.RightChild == null)
+                {
+                    parent.RightChild = null;
+                }
+            }
+            if(current.LeftChild != null) // если оба ребенка
+            {
+                if(current.RightChild != null)
+                {
+                    if(parent.Value.CompareTo(current.Value) > 0)
+                    {
+                        parent.LeftChild = current.LeftChild;
+                        current.LeftChild.RightChild = current.RightChild;
+
+                    }
+                    else
+                    {
+                        parent.RightChild = current.LeftChild;
+                        current.LeftChild.RightChild = current.RightChild;
+                    }
+                }
+            }
         }
     }
-
     class Program
     {
-        
         static void Main(string[] args)
         {
-            
+            var tree = new Tree();
+            tree.AddItem(100);            
+            tree.AddItem(90);
+            tree.AddItem(110);
+            tree.AddItem(70);
+            tree.AddItem(95);
+            tree.AddItem(105);
+            tree.AddItem(115);
+
+            tree.PrintTree();
+            Console.WriteLine("----------------------");
+            tree.RemoveItem(110);
+            tree.PrintTree();
         }
+
     }
 }
