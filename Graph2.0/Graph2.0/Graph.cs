@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,18 +16,18 @@ namespace Graph2._0
         public int Edges => Edgess.Count;
 
 
-        public void AddVertex(Vertex vertex)
+        public void AddVertex(Vertex vertex) // Добавить узел в список узлов
         {
             Vertices.Add(vertex);
         }
-        public void AddEdge(Vertex from, Vertex to)
+        public void AddEdge(Vertex from, Vertex to) // Добавить связь в список ребер (связей)
         {
             var edge = new Edges(from, to);
             Edgess.Add(edge); 
         }
 
 
-        public int[,] Matrix()
+        public int[,] Matrix() // Матрица смежности
         {
             var matrix = new int[Vertices.Count, Vertices.Count];
             foreach(var edge in Edgess)
@@ -40,7 +41,7 @@ namespace Graph2._0
             return matrix;
         }
 
-        public List<Vertex> GetVertexList(Vertex vertex)
+        public List<Vertex> GetVertexList(Vertex vertex) // Список узлов
         {
             var result = new List<Vertex>();
 
@@ -54,8 +55,9 @@ namespace Graph2._0
             return result;
         }
        
-        public bool BFS(Vertex start, Vertex finish)
+        public bool BFS(Vertex start, Vertex finish) // Обход в ширину
         {
+            Console.WriteLine("BFS");
             int step = 1;
 
             var queue = new Queue<Vertex>();
@@ -79,28 +81,34 @@ namespace Graph2._0
 
             return queue.Contains(finish);
         }
-        public void DFS(Vertex start, Vertex finish) //на 11.12 не реализовано
+        public bool DFS(Vertex start, Vertex finish) // Обход в глубину
         {
+            Console.WriteLine("DFS");
+            List<Vertex> visited = new List<Vertex>();
+
+            Stack<Vertex> stack = new Stack<Vertex>();
+
             int step = 1;
 
-            var stack = new Stack<Vertex>();
             stack.Push(start);
 
-            Console.WriteLine($"Шаг {step} - " + start);
-
-            for (int i = 0; i <= stack.Count; i++)
+            while(stack.Count > 0)
             {
                 var vertex = stack.Pop();
-                foreach (var v in GetVertexList(vertex))
+
+                Console.WriteLine($"Шаг {step} - " + vertex);
+                step++;
+
+                if (!visited.Contains(vertex))
                 {
-                    if (!stack.Contains(v))
+                    visited.Add(vertex);
+                    foreach (var v in GetVertexList(vertex))
                     {
                         stack.Push(v);
-                        step++;
-                        Console.WriteLine($"Шаг {step} - " + v);
                     }
                 }
             }
+            return visited.Contains(finish);
         }
 
     }

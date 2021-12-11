@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph2._0
 {
-    public class Vertex
+    public class Vertex // Узел графа
     {
         public int Value { get; set; }
         public Vertex(int value)

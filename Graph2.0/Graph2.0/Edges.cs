@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Graph2._0
 {
-    internal class Edges
+    internal class Edges // Ребро графа
     {
         public Vertex From { get; set; }    
         public Vertex To { get; set; }

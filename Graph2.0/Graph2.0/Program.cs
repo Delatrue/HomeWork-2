@@ -27,19 +27,23 @@ namespace Graph2._0
             graph.AddEdge(v1, v2);
             graph.AddEdge(v1, v4);
             graph.AddEdge(v2, v3);
-            graph.AddEdge(v3, v4);
             graph.AddEdge(v4, v3);
-            graph.AddEdge(v4, v5);
-            graph.AddEdge(v5, v4);            
+            graph.AddEdge(v4, v5);            
 
-            GetMatrix(graph);           
+            //GetMatrix(graph);
+            //Console.WriteLine();
+            //GetVertex(graph, v1);
+            //GetVertex(graph, v2);
+            //GetVertex(graph, v3);
+            //GetVertex(graph, v4);
+            //GetVertex(graph, v5);
 
             graph.BFS(v1, v5);
             Console.WriteLine();
-            //graph.DFS(v1, v5); не реализовано
+            graph.DFS(v1, v5);
         }
 
-        private static void GetVertex(Graph graph, Vertex vertex)
+        private static void GetVertex(Graph graph, Vertex vertex) // Вывести на консоль узел и его смежные узлы
         {
             Console.Write(vertex.Value + ": ");
             foreach(var v in graph.GetVertexList(vertex))
@@ -49,7 +53,7 @@ namespace Graph2._0
             Console.Write("\n");
         }
 
-        private static void GetMatrix(Graph graph)
+        private static void GetMatrix(Graph graph) //вывести на консоль матрицу смежности
         {
             var matrix = graph.Matrix();
 
