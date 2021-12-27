@@ -28,7 +28,7 @@ namespace ООП_Урок_2
             _balance = value;
             return _balance;
         }
-        public TypeAccount TypeAccount(int type)
+        public TypeAccount TypeAccount(TypeAccount type)
         {
             _typeAccount = (TypeAccount)type;
             return _typeAccount;
@@ -50,7 +50,7 @@ namespace ООП_Урок_2
             }
             else
             {
-                Console.WriteLine("Недостаточно средст");
+                Console.WriteLine("Недостаточно средств");
                 return -1;
             }
         }

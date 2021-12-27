@@ -9,12 +9,10 @@ namespace ООП_Урок_2
             //методы, класс BankAccount
             //метод генерации Id реализован в классе BankAccount и используется в других классах
             BankAccount account = new BankAccount();
-            account.Balance(1000);
-            account.TypeAccount(0);
-                       
+                                  
             void PrintBA()
             {
-                Console.WriteLine($"{account.AccountId()} {account.Balance(1000)} {account.TypeAccount(0)}");
+                Console.WriteLine($"{account.AccountId()} {account.Balance(1000)} {account.TypeAccount(TypeAccount.Current)}");
             }
             PrintBA();
 
