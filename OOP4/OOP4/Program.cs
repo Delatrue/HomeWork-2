@@ -6,7 +6,11 @@ namespace OOP4
     {
         static void Main(string[] args)
         {
-            //в процессе решения, будет готово 4-5 января
+            BuildingDescription house = new BuildingDescription();
+            house.Building(15, 5, 40, 2);
+            house.HeightFloor();
+            house.FlatsOnFloor();
+            house.FlatsInEntrance();
         }
     }
 }
