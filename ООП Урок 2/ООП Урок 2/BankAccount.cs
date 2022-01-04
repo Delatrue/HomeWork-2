@@ -12,37 +12,54 @@ namespace ООП_Урок_2
         Deposit,
         Foreign
     }
-
     internal class BankAccount
     {
-        private int _balance;
+        private int _idAccount;
+        private decimal _balance;
         private TypeAccount _typeAccount;
-        public static int _accountIdAuto = 0;
-        public int AccountId()
+        private static int _idAccountGenerate = 0;
+
+        public int IdAccount()
         {
-            _accountIdAuto++;
-            return _accountIdAuto;
+            this._idAccount = ++_idAccountGenerate;
+            return _idAccountGenerate;
         }
-        public int Balance(int value)
+        public decimal Balance
         {
-            _balance = value;
-            return _balance;
+            get
+            {
+                return this._balance;
+            }
+            set
+            {
+                this._balance = value;
+            }
         }
-        public TypeAccount TypeAccount(TypeAccount type)
+        public TypeAccount TypeAccount
         {
-            _typeAccount = (TypeAccount)type;
-            return _typeAccount;
+            get
+            {
+                return this._typeAccount;
+            }
+            set
+            {
+                this._typeAccount = value;
+            }
         }
 
-        // Снять деньги
-        public int GetMoney(int value)
+        public void Print()
         {
-            if(value <= 0)
+            Console.WriteLine($"{_idAccount} {_balance} {_typeAccount}");
+        }
+
+        public decimal GetMoneyFromAccount(int value)
+        {
+            if (value <= 0)
             {
-                Console.WriteLine("Invalide sum");
+                Console.WriteLine("Operation error");
                 return -1;
             }
-            else if(_balance - value > 0)
+            else if (_balance - value > 0)
             {
                 _balance = _balance - value;
                 Console.WriteLine($"Остаток на счете {_balance}");
@@ -55,20 +72,19 @@ namespace ООП_Урок_2
             }
         }
 
-        // Положить деньги
-        public int PutMoney(int value)
+        public decimal PutMoneyToAccount(int value)
         {
             if (value <= 0)
             {
-                Console.WriteLine("Invalide sum");
+                Console.WriteLine("Operation error");
                 return -1;
             }
             else
             {
                 _balance = _balance + value;
                 Console.WriteLine($"Остаток на счете {_balance}");
-                return _balance;                
-            }            
+                return _balance;
+            }
         }
     }
 }

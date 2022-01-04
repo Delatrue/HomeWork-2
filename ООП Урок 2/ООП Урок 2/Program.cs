@@ -6,30 +6,20 @@ namespace ООП_Урок_2
     {
         static void Main(string[] args)
         {
-            //методы, класс BankAccount
-            //метод генерации Id реализован в классе BankAccount и используется в других классах
-            BankAccount account = new BankAccount();
-                                  
-            void PrintBA()
-            {
-                Console.WriteLine($"{account.AccountId()} {account.Balance(1000)} {account.TypeAccount(TypeAccount.Current)}");
-            }
-            PrintBA();
+            BankAccount account1 = new BankAccount();
+            account1.IdAccount();
+            account1.Balance = 1000;
+            account1.TypeAccount = TypeAccount.Current;
+            account1.Print();
 
-            //конструкторы, класс AccountInBank
-            AccountInBank account2 = new AccountInBank(1500, TypeAccount.Foreign);
-            AccountInBank account3 = new AccountInBank(1800, TypeAccount.Current);
+            BankAccount account2 = new BankAccount();
+            account2.IdAccount();
+            account2.Balance = 2000;
+            account2.TypeAccount = TypeAccount.Current;
+            account2.Print();
 
-            //свойства, класс BankAccountProp
-            BankAccountProp account4 = new BankAccountProp();
-            account4.AccountId();
-            account4.Balance = 2300;
-            account4.TypeAccount = TypeAccount.Current;
-            Console.WriteLine($"{BankAccount._accountIdAuto} {account4.Balance} {account4.TypeAccount}");
-
-            account.GetMoney(100);
-            account.PutMoney(500);
-            
+            account1.GetMoneyFromAccount(500);
+            account1.PutMoneyToAccount(600);
         }
     }
 }
